@@ -3,7 +3,6 @@ using DG.Tweening;
 
 public class CameraController : MonoBehaviour
 {
-
     public Transform Plane;
     public Transform cameraTransform;
     public enum CameraMode { Automatic, Manual };
@@ -12,11 +11,10 @@ public class CameraController : MonoBehaviour
     public float cameraMovementSpeed = 1f;
     public Texture2D automaticCameraModeTexture;
     public Texture2D manualCameraModeTexture;
-    
     private Vector3 targetPosition;
     private bool isMoving = false;
     
-    void Start()
+    public void Start()
     {
         if (currentCameraMode == CameraMode.Automatic)
         {
@@ -29,7 +27,7 @@ public class CameraController : MonoBehaviour
         }
     } 
 
-    void Update()
+    public void Update()
     {
         if (currentCameraMode == CameraMode.Manual)
         {
@@ -52,11 +50,12 @@ public class CameraController : MonoBehaviour
                     isMoving = false;
                 }
             }
+            
             cameraTransform.LookAt(Plane.transform.position);
         }
     }
 
-    void OnGUI()
+    public void OnGUI()
     {
         if (GUI.Button(new Rect(10, 10, 50, 50), currentCameraMode == CameraMode.Automatic ? automaticCameraModeTexture : manualCameraModeTexture))
         {
@@ -65,8 +64,8 @@ public class CameraController : MonoBehaviour
             {
                 targetPosition = cameraTransform.position;
             }
+            
             Start();
         }
     }
-
 }
